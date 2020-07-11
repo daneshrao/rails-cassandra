@@ -24,6 +24,16 @@ stages {
 			}
 		}
 	}
-	
+
+stage('DeployToProduction') {
+            steps {
+                kubernetesDeploy(
+                    kubeconfigId: 'kubeconfig',
+                    configs: 'rails-app.yaml',
+                    enableConfigSubstitution: true
+                )
+            }
+        }
+    }	
 }
-}
+

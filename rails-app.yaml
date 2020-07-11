@@ -1,8 +1,9 @@
+       
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: rails-app
-  labels: 
+  labels:
     name: rails-app
 spec:
   replicas: 3
@@ -10,12 +11,12 @@ spec:
     type: Recreate
   template:
     metadata:
-      labels: 
+      labels:
         name: rails-app
     spec:
       containers:
       - name: rails-app # name of our container
-        image: daneshrao/rubyonrails:latest
+        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         command: ["/bin/sh","-c"]
         args: ["rails cequel:keyspace:create; rails cequel:migrate; rails server -b 0.0.0.0"]
         ports:
