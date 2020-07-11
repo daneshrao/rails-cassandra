@@ -28,7 +28,7 @@ stages {
 stage('DeployToProduction') {
             steps {
                 kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
+                    kubeconfigId: 'kube-config',
                     configs: 'rails-app.yaml',
                     enableConfigSubstitution: true
                 )
