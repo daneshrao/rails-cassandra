@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: rails-app
+  labels: 
+    name: rails-app
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels: 
+        name: rails-app
+    spec:
+      containers:
+      - name: rails-app # name of our container
+        image: daneshrao/rubyonrails:latest
+        command: ["/bin/sh","-c"]
+        args: ["rails cequel:keyspace:create; rails cequel:migrate; rails server -b 0.0.0.0"]
+        ports:
+        - containerPort: 3000 # expose the running contianer on port 3000
+          name: rails-app
+          protocol: TCP
