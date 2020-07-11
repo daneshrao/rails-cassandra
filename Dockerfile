@@ -13,7 +13,7 @@ COPY Gemfile* /myapp/
 COPY . /myapp
 RUN bundle install
 RUN bundle exec rake webpacker:install
-RUN rails cequel:migrate
+#RUN rails cequel:migrate
 
 FROM dev as stage
 COPY entrypoint.sh /usr/bin/
@@ -24,4 +24,4 @@ EXPOSE 3000
 #CMD ["rails", "new", "blog", "---skip-active-record", "--skip-active-storage", "-T", "--skip-bundle"]
 #CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 #CMD ["rails", "-s"]
-CMD ["rails", "server", "-b", "0.0.0.0"]
+#CMD ["rails", "server", "-b", "0.0.0.0"]
