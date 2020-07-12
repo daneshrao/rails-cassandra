@@ -27,11 +27,10 @@ stages {
 
 stage('DeployToProduction') {
             steps {
-                kubernetesDeploy(
-                    kubeconfigId: 'kube-config',
-                    configs: 'rails-app.yaml',
-                    enableConfigSubstitution: true
-                )
+		    script {
+			    sh 'DOCKERIMAGE=`env | grep -i "BUILD_DISPLAY_NAME" | awk '{print $2}'`'
+			    sh 'echo DOCKERIMAGE'
+		    }
             }
         }
     }	
