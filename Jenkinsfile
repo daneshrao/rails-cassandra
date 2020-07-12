@@ -31,7 +31,7 @@ stage('DeployToProduction') {
 			    sh 'echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER'
 			    
 			    //sh 'sh change.sh $DOCKER_IMAGE_NAME:$BUILD_NUMBER'
-			    sh 'sh change.sh'
+			    sh 'sh ./change.sh'
 
 			    
 		    }
