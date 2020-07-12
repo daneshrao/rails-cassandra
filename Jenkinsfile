@@ -28,8 +28,7 @@ stages {
 
 	stage('DeployToProduction') {
             steps {
-                	script: "sh change.sh"
-                )
+                   sh 'kubectl get po'
             }
         }
 }
