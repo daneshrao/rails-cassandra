@@ -25,19 +25,7 @@ stages {
 		}
 	}
 
-/*stage('DeployToProduction') {
-            steps {
-		    script {
-			    sh 'echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER'
-			    
-			    //sh 'sh change.sh $DOCKER_IMAGE_NAME:$BUILD_NUMBER'
-			    sh 'sh ./change.sh'
 
-			    
-		    }
-            }
-        }
-    }	*/
 stage('DeployToProduction') {
             steps {
                 kubernetesDeploy(
