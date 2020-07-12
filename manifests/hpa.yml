@@ -1,17 +1,17 @@
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2beta1                    #autoscaling apiversion type
+kind: HorizontalPodAutoscaler                      #kind of the kubernetes object to be created
 metadata:
-  name: rails-app
-  namespace: default
+  name: rails-app                                  #metadata to reference selectors of pod
+  namespace: default                               #namespace to which it has to be provisioned
 spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
+  scaleTargetRef:                                  #which onject to be referenced
+    apiVersion: apps/v1         
     kind: Deployment
     name: rails-app
-  minReplicas: 3
+  minReplicas: 3                                   #minimum and maximum replicas
   maxReplicas: 6
-  metrics:
+  metrics:                                         #metrics to which the be monitored
   - type: Resource
     resource:
-      name: cpu
-      targetAverageUtilization: 50
+      name: cpu                                    #cpu metrics to be monitored
+      targetAverageUtilization: 50                 #targeted utilization threshold

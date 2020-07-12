@@ -1,7 +1,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-        name: fast
-provisioner: kubernetes.io/gce-pd
+        name: fast                                      #type of the storage class to be used for dynamic provisioning
+provisioner: kubernetes.io/gce-pd                       #gcp persistent disk used as storage provisioner
 parameters:
   type: pd-standard

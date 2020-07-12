@@ -1,11 +1,11 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolumeClaim                         #type of the object
 metadata:
-  name: cassandra
+  name: cassandra                                   #metadata to which labels to be addressed
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: fast
+    - ReadWriteOnce                                 #type of access mode for a particular node to pod
+  storageClassName: fast                            #storage class provisioned as a part of DYNAMIC provisioning is referenced here
   resources:
     requests:
-      storage: 20Gi
+      storage: 20Gi                                 #amount of storage resources that can be utilized
