@@ -26,13 +26,11 @@ stages {
 	}
 
 
-stage('DeployToProduction') {
+	stage('DeployToProduction') {
             steps {
-                kubernetesDeploy(
-                    kubeconfigId: 'kube-config',
-                    configs: 'rails-app.yml',
-                    enableConfigSubstitution: true
+                	script: "sh change.sh"
                 )
             }
         }
+}
 }
