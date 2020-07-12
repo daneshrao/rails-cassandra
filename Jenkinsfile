@@ -28,8 +28,8 @@ stages {
 stage('DeployToProduction') {
             steps {
 		    script {
-			    sh 'DOCKERIMAGE=`env | grep -i "BUILD_DISPLAY_NAME" | awk '{print $2}'`'
-			    sh 'echo DOCKERIMAGE'
+			    sh 'echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER'
+			    
 		    }
             }
         }
