@@ -30,7 +30,7 @@ stages {
             steps {
 		    script{
                    	    sh 'gcloud container clusters get-credentials test-cassandra --zone us-central1-c --project hybrid-matrix-269303'	
-			    sh 'kubectl get pods'
+			    sh 'kubectl get deploy rails-app -n default -o yaml > rails-app.yaml && sed -i "s/$DOCKER_IMAGE_NAME:$BUILD_NUMBER/$DOCKER_IMAGE_NAME:$BUILD_NUMBER/g" rails-app.yaml && kubectl replace -f rails-app.yaml'
 			    
 		    }
             }
