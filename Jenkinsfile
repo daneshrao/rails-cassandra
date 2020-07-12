@@ -29,11 +29,9 @@ stage('DeployToProduction') {
             steps {
 		    script {
 			    sh 'echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER'
-<<<<<<< HEAD
 			    sh 'chmod +x change.sh
 			    sh "sh change.sh $DOCKER_IMAGE_NAME:$BUILD_NUMBER"
-=======
->>>>>>> 3bd134ae9954ae41f7e7baa0836a60f679ef76ed
+
 			    
 		    }
             }
