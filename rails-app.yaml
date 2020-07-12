@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: rails-app # name of our container
-        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+        image: daneshrao/rubyonrails:$BUILD_NUMBER
         command: ["/bin/sh","-c"]
         args: ["rails cequel:keyspace:create; rails cequel:migrate; rails server -b 0.0.0.0"]
         ports:
