@@ -1,14 +1,14 @@
        
 apiVersion: v1
 kind: Deployment
-metadata:
-  name: rails-app
+metadata:                                                      #metadata for the deployment
+  name: rails-app                                              #label with which the pods are grouped
   namespace : default
   labels:
     name: rails-app
 spec:
   replicas: 3
-  strategy:
+  strategy:                                                    #types of update stratergy, rolling/ramped/recreate/bluegreen/canary
     type: RollingUpdate
   template:
     metadata:
@@ -17,10 +17,10 @@ spec:
     spec:
       containers:
       - name: rails-app # name of our container
-        image: daneshrao/rubyonrails:$BUILD_NUMBER
+        image: daneshrao/rubyonrails:$BUILD_NUMBER               #image to be used, build number is changed in runtime level in jenkins pipeline execution
         command: ["/bin/sh","-c"]
-        args: ["rails cequel:keyspace:create; rails cequel:migrate; rails server -b 0.0.0.0"]
+        args: ["rails cequel:keyspace:create; rails cequel:migrate; rails server -b 0.0.0.0"]            #arguments to pass to the entrypoint script
         ports:
-        - containerPort: 3000 # expose the running contianer on port 3000
+        - containerPort: 3000                                    # expose the running contianer on port 3000    
           name: rails-app
           protocol: TCP
