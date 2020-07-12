@@ -25,7 +25,7 @@ stages {
 		}
 	}
 
-stage('DeployToProduction') {
+/*stage('DeployToProduction') {
             steps {
 		    script {
 			    sh 'echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER'
@@ -37,5 +37,14 @@ stage('DeployToProduction') {
 		    }
             }
         }
-    }	
+    }	*/
+stage('DeployToProduction') {
+            steps {
+                kubernetesDeploy(
+                    kubeconfigId: 'kube-config',
+                    configs: 'rails-app.yml',
+                    enableConfigSubstitution: true
+                )
+            }
+        }
 }
