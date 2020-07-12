@@ -27,13 +27,13 @@ stages {
 
 stage('DeployToProduction') {
             steps {
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'rails-app.yaml',
-                    enableConfigSubstitution: true
-                )
+		    script {
+			    sh 'echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER'
+			    sh 'chmod +x change.sh
+			    sh "sh change.sh $DOCKER_IMAGE_NAME:$BUILD_NUMBER"
+			    
+		    }
             }
         }
     }	
 }
-
