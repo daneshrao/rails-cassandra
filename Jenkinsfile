@@ -28,7 +28,11 @@ stages {
 
 	stage('DeployToProduction') {
             steps {
-                   sh 'kubectl get po'
+		    script{
+                   	    sh 'gcloud container clusters get-credentials test-cassandra --zone us-central1-c --project hybrid-matrix-269303'	
+			    sh 'kubectl get pods'
+			    
+		    }
             }
         }
 }
