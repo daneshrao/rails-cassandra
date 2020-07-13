@@ -40,14 +40,14 @@ stages {
 				steps{
 				sh "chmod +x -R ${env.WORKSPACE}"
 				timeout(time: 120, unit: 'SECONDS') {
-                statusCode = sh(script: sh ./check_pod.sh,returnStatus:true)
+                statusCode = sh(script: "sh ./check_pod.sh",returnStatus:true)
 		  	 	if (statusCode == 1)
 		    		{
 					echo "Health-Check failed"
 					currentBuild.result = 'FAILURE'
 					echo "Pod creation Failed revrting back to old image"
 				
-						sh "kubectl rollout undo deployment rails-app --revision=1"
+					sh "kubectl rollout undo deployment rails-app --revision=1"
 							
 		    		}
 				else 
