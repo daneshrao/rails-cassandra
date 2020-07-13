@@ -46,7 +46,9 @@ stages {
 					echo "Health-Check failed"
 					currentBuild.result = 'FAILURE'
 					echo "Pod creation Failed revrting back to old image"
-					script {sh "kubectl rollout undo deployment/rails-app --revision=1"}
+					script {
+						sh "kubectl rollout undo deployment/rails-app --revision=1"
+							}
 		    		}
 				else 
 					{	
