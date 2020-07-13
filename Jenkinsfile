@@ -41,17 +41,17 @@ stages {
 				  sh "chmod +x -R ${env.WORKSPACE}"
 				
 				   timeout(time: 120, unit: 'SECONDS') {
-				   statusCode = sh (script: "sh ./check_pod.sh",returnStatus:true)
-				   if (statusCode == 1)
-				    {
-					echo "Health-Check failed"
-					echo "Pod creation Failed revrting back to old image"
-					 sh "kubectl rollout undo deployment/rails-app --to-revision=1" 
-				    }
-				   else 
-				   {
-					currentBuild.result = 'SUCCESS'
-				   }
+				   def statusCode = sh (script: "sh ./check_pod.sh",returnStatus:true)
+					   if (statusCode == 1)
+					    {
+						echo "Health-Check failed"
+						echo "Pod creation Failed revrting back to old image"
+						 sh "kubectl rollout undo deployment/rails-app --to-revision=1" 
+					    }
+					   else 
+					   {
+						currentBuild.result = 'SUCCESS'
+					   }
 			}
 			}
 	}
