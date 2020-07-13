@@ -40,7 +40,9 @@ stages {
 				steps{
 				sh "chmod +x -R ${env.WORKSPACE}"
 				timeout(time: 120, unit: 'SECONDS') {
-                statusCode = sh(script: "sh ./check_pod.sh",returnStatus:true)
+			environment {
+     				statusCode = sh(script: "sh ./check_pod.sh",returnStatus:true)
+   					}
 		  	 	if (statusCode == 1)
 		    		{
 					echo "Health-Check failed"
