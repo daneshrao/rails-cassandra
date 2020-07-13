@@ -30,7 +30,7 @@ stages {
             steps {
 		    script{
                    	    sh 'gcloud container clusters get-credentials test-cassandra --zone us-central1-c --project hybrid-matrix-269303'	
-						sh "kubectl get deploy rails-app -n default -o yaml > rails-app.yaml && sed -i 's/$BUILD_NUMBER/$BUILD_NUMBER/g' rails-app.yaml && kubectl replace -f rails-app.yaml"
+						sh "kubectl get deploy rails-app -n default -o yaml > rails-app.yaml && sed -i 's/$BUILD_NUMBER/$BUILD_NUMBER/g' rails-app.yaml && kubectl apply -f rails-app.yaml"
 			    
 		    }
             }
@@ -38,9 +38,20 @@ stages {
 
 	stage('healthcheck'){
 			steps{
-			script {
-				sh "chmod +x -R ${env.WORKSPACE}"
-				sh "./check_pod.sh"
+				  sh "chmod +x -R ${env.WORKSPACE}"
+				
+				   timeout(time: 120, unit: 'SECONDS') {
+				   def statusCode = sh (script: "sh ./check_pod.sh",returnStatus:true)
+				   if (statusCode == 1)
+				    {
+					echo "Health-Check failed"
+					echo "Pod creation Failed revrting back to old image"
+					 sh "kubectl rollout undo deployment/rails-app --to-revision=1" 
+				    }
+				   else 
+				   {
+					currentBuild.result = 'SUCCESS'
+				   }
 			}
 			}
 	}
