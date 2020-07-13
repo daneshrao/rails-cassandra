@@ -38,8 +38,9 @@ stages {
 
 	stage('healthcheck'){
 			steps{
-				  sh "chmod +x -R ${env.WORKSPACE}"
-				  sh "./check_pod.sh"
+			script {
+				sh "chmod +x -R ${env.WORKSPACE}"
+				sh "./check_pod.sh"
 			}
 			}
 	}
